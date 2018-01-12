@@ -1,0 +1,121 @@
+NAME
+
+        sixtemp_i2c.h - client library for sixtemp sensor
+
+SYNOPSIS
+
+        #include <Arduino.h>
+        #include <sixtemp_i2c.h>
+        #include <Wire.h>
+    
+        sixtemp_i2c stemp(0x18);
+    
+        void setup () {
+            Serial.begin(9600);
+            stemp.begin();
+        }
+    
+        void loop () {
+            stemp.refresh();
+            Serial.println("sensor count: "+String(stemp.count));
+            if (stemp.count) {
+                sixtemp_i2c_temp temp = stemp.get_temp(0);
+                Serial.println("temp: "+temp.address_as_string()+" "+temp.as_string());
+            }
+    
+            delay(3000);
+        }
+
+DESCRIPTION
+
+    This is a client library for sixtemp sensor
+    https://github.com/jozef/sixtemp_sensor
+
+INSTALL
+
+    Clone the repository folder into sketchbook/libraries/sixtemp_i2c
+
+CLASS
+
+ class sixtemp_i2c
+
+  sixtemp_i2c(uint8_t i2c_addr = DEFAULT_I2C_ADDR);
+
+    Class constructor.
+
+  void begin();
+
+    Start i2c.
+
+  sixtemp_i2c_temp get_temp(uint8_t idx);
+
+    Return "class sixtemp_i2c_temp" for temperature at idx.
+
+  void refresh();
+
+    Refresh all temperature readings from sixtemp sensor via i2c.
+
+  uint8_t count;
+
+    Number of temperatures present.
+
+  sixtemp_i2c_temp temp_sensors[MAX_SENSORS];
+
+    Array of all "class sixtemp_i2c_temp".
+
+ class sixtemp_i2c_temp
+
+    Represents one temperature. Has following public variables and methods:
+
+  bool has_error;
+
+    true/false if there was an error
+
+  bool has_address;
+
+    true/false if there temp position has address assigned
+
+  float temp_c;
+
+    temperature
+
+  String as_string();
+
+    temp_c as String, ex.: "21.8 C"
+
+  char address[8];
+
+    Temperature sensors 8 byte address.
+
+  String address_as_string();
+
+    address as String, ex.: "28ff3ff6a1160322"
+
+EXAMPLES
+
+ examples/sixtemp_readout/sixtemp_readout.ino
+
+    Example serial output when uploaded to an Arduino connected to
+    sixtemp_sensor via i2c:
+
+        sensor count: 6
+        sensor 1: n/a
+        sensor 2: 28ff3ff6a1160322 19.8 C
+        sensor 3: 286164122e7c499a 21.8 C
+        sensor 4: 286164122f88f163 error
+        sensor 5: 28ffa59492160558 19.8 C
+        sensor 6: 286164122f89682a 21.5 C
+        readouts count: 92, errors: 9
+
+SEE ALSO
+
+    https://github.com/jozef/sixtemp_sensor
+
+LICENSE
+
+    This is free software, licensed under the MIT License.
+
+AUTHOR
+
+        Jozef Kutej
+
