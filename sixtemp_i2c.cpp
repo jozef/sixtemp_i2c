@@ -52,6 +52,23 @@ sixtemp_i2c_temp sixtemp_i2c::get_temp(uint8_t idx) {
     return temp_sensors[idx];
 }
 
+void sixtemp_i2c::set_led(bool flag) {
+    Wire.beginTransmission(_i2c_addr);
+    Wire.write(0x21);
+    Wire.write(flag);
+    Wire.endTransmission();
+    delayMicroseconds(TRANSMISSION_REQUEST_DELAY);
+}
+
+bool sixtemp_i2c::led_status() {
+    Wire.beginTransmission(_i2c_addr);
+    Wire.write(0x01);
+    Wire.endTransmission();
+    delayMicroseconds(TRANSMISSION_REQUEST_DELAY);
+    Wire.requestFrom(_i2c_addr, (uint8_t)1);
+    return Wire.read();
+}
+
 void sixtemp_i2c::refresh() {
     Wire.beginTransmission(_i2c_addr);
     Wire.write(0x60); // read sensors count

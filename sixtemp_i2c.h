@@ -25,6 +25,8 @@ class sixtemp_i2c {
         void refresh();
         uint8_t count;
         sixtemp_i2c_temp temp_sensors[MAX_SENSORS];
+        void set_led(bool flag);
+        bool led_status();
     private:
         uint8_t _i2c_addr;
 };

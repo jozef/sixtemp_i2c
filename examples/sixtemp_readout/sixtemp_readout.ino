@@ -54,5 +54,14 @@ void loop () {
     }
     Serial.println("readouts count: "+String(readouts)+", errors: "+String(readouts_err));
 
+    if ((readouts % ((1+readout_count)*5)) == 0) {
+        Serial.println("set led off for 3s");
+        stemp.set_led(false);
+    }
+    else {
+        stemp.set_led(true);
+    }
+    Serial.println("led status: "+String(stemp.led_status() ? "on" : "off"));
+
     delay(3000);
 }
