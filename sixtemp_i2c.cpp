@@ -17,8 +17,8 @@ String sixtemp_i2c_temp::as_string() {
 
     return String(int(temp_c))
         +'.'
-        +String(int((temp_c - int(temp_c))*10))
-        +" C";
+        +String(abs(int((temp_c - int(temp_c))*10)))
+        +'\xB0'+"C";    // °C
 }
 
 String sixtemp_i2c_temp::address_as_string() {
