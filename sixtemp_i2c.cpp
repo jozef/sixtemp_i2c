@@ -15,9 +15,11 @@ String sixtemp_i2c_temp::as_string() {
         return "n/a";
     }
 
-    return String(int(temp_c))
+    return
+        (tdeg < 0 ? "-" : "")
+        + String(abs(tdeg/10))
         +'.'
-        +String(abs(int((temp_c - int(temp_c))*10)))
+        +String(abs(tdeg % 10))
         +'\xB0'+"C";    // °C
 }
 
@@ -104,4 +106,8 @@ void sixtemp_i2c::refresh() {
             temp_sensors[i].has_error = true;
         }
     }
+}
+
+float sixtemp_i2c_temp::temp_c() {
+    return (float(tdeg)/10);
 }

@@ -11,7 +11,8 @@ class sixtemp_i2c_temp {
     public:
         bool has_error;
         bool has_address;
-        float temp_c;
+        int16_t tdeg;
+        float temp_c();
         char address[8];
         String as_string();
         String address_as_string();
@@ -111,9 +112,13 @@ true/false if there was an error
 
 true/false if there temp position has address assigned
 
-=head3 float temp_c;
+=head3 float temp_c();
 
-temperature
+temperature in degrees Celsius
+
+=head3 int16_t tdeg;
+
+temperature in tenth of degrees Celsius
 
 =head3 String as_string();
 

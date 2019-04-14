@@ -75,9 +75,13 @@ CLASS
 
     true/false if there temp position has address assigned
 
-  float temp_c;
+  float temp_c();
 
-    temperature
+    temperature in degrees Celsius
+
+  int16_t tdeg;
+
+    temperature in tenth of degrees Celsius
 
   String as_string();
 
