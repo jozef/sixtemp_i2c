@@ -1,6 +1,6 @@
 NAME
 
-        sixtemp_i2c.h - client library for sixtemp sensor
+        sixtemp_i2c.h - I2C master library for sixtemp sensor
 
 SYNOPSIS
 
@@ -114,6 +114,7 @@ EXAMPLES
 SEE ALSO
 
     https://github.com/jozef/sixtemp_sensor
+    https://blog.kutej.net/2019/03/sixtemp
 
 LICENSE
 

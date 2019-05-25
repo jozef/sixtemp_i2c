@@ -38,7 +38,7 @@ class sixtemp_i2c {
 
 =head1 NAME
 
-    sixtemp_i2c.h - client library for sixtemp sensor
+    sixtemp_i2c.h - I2C master library to read out data from sixtemp sensor
 
 =head1 SYNOPSIS
 
@@ -151,6 +151,7 @@ via i2c:
 =head1 SEE ALSO
 
 L<https://github.com/jozef/sixtemp_sensor>
+L<https://blog.kutej.net/2019/03/sixtemp>
 
 =head1 LICENSE
 
